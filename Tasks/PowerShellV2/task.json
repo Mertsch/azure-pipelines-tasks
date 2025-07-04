@@ -42,10 +42,11 @@
       "label": "Type",
       "required": false,
       "defaultValue": "filePath",
-      "helpMarkDown": "Target script type: File Path or Inline",
+      "helpMarkDown": "Target script type: File Path, Inline, or Module",
       "options": {
         "filePath": "File Path",
-        "inline": "Inline"
+        "inline": "Inline",
+        "module": "Module"
       }
     },
     {
@@ -61,10 +62,10 @@
       "name": "arguments",
       "type": "string",
       "label": "Arguments",
-      "visibleRule": "targetType = filePath",
+      "visibleRule": "targetType = filePath || targetType = module",
       "required": false,
       "defaultValue": "",
-      "helpMarkDown": "Arguments passed to the PowerShell script. Either ordinal parameters or named parameters."
+      "helpMarkDown": "Arguments passed to the PowerShell script or module. Either ordinal parameters or named parameters."
     },
     {
       "name": "script",
@@ -79,6 +80,15 @@
         "maxLength": "20000"
       },
       "helpMarkDown": ""
+    },
+    {
+      "name": "moduleName",
+      "type": "string",
+      "label": "Module Name",
+      "visibleRule": "targetType = module",
+      "required": true,
+      "defaultValue": "",
+      "helpMarkDown": "Name of the PowerShell module to import. Can be a module name, path to a module file (.psm1), or path to a module manifest (.psd1)."
     },
     {
       "name": "errorActionPreference",
