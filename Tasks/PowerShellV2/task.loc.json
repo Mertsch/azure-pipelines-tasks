@@ -86,7 +86,7 @@
       "type": "string",
       "label": "ms-resource:loc.input.label.moduleName",
       "visibleRule": "targetType = module",
-      "required": true,
+      "required": false,
       "defaultValue": "",
       "helpMarkDown": "ms-resource:loc.input.help.moduleName"
     },
