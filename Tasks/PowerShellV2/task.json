@@ -86,7 +86,7 @@
       "type": "string",
       "label": "Module Name",
       "visibleRule": "targetType = module",
-      "required": true,
+      "required": false,
       "defaultValue": "",
       "helpMarkDown": "Name of the PowerShell module to import. Can be a module name, path to a module file (.psm1), or path to a module manifest (.psd1)."
     },
