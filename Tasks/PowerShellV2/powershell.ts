@@ -48,7 +48,7 @@ async function run() {
             input_arguments = tl.getInput('arguments') || '';
         }
         else if (input_targetType.toUpperCase() == 'INLINE') {
-            input_script = tl.getInput('script', false) || '';
+            input_script = tl.getInput('script', /*required*/ true) || '';
         }
         else if (input_targetType.toUpperCase() == 'MODULE') {
             input_moduleName = tl.getInput('moduleName', /*required*/ true) || '';
@@ -56,6 +56,7 @@ async function run() {
                 throw new Error(tl.loc('JS_InvalidModuleName', input_moduleName));
             }
             input_arguments = tl.getInput('arguments') || '';
+            input_script = tl.getInput('script', false) || '';
         }
         else {
             throw new Error(tl.loc('JS_InvalidTargetType', input_targetType));
@@ -107,6 +108,7 @@ async function run() {
         } else if (input_targetType.toUpperCase() == 'MODULE') {
             try {
                 validateFileArgs(input_arguments);
+                console.log(input_arguments);
             }
             catch (error) {
                 if (error instanceof ArgsSanitizingError) {
@@ -122,6 +124,11 @@ async function run() {
             }
 
             script = `Import-Module '${input_moduleName.replace(/'/g, "''")}' ${input_arguments}`.trim();
+            
+            // Add additional script after module import if provided
+            if (input_script && input_script.trim()) {
+                script += '\n' + input_script;
+            }
         } else {
             script = `${input_script}`;
         }

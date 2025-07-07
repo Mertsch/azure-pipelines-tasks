@@ -45,7 +45,8 @@
       "helpMarkDown": "ms-resource:loc.input.help.targetType",
       "options": {
         "filePath": "File Path",
-        "inline": "Inline"
+        "inline": "Inline",
+        "module": "Module"
       }
     },
     {
@@ -61,7 +62,7 @@
       "name": "arguments",
       "type": "string",
       "label": "ms-resource:loc.input.label.arguments",
-      "visibleRule": "targetType = filePath",
+      "visibleRule": "targetType = filePath || targetType = module",
       "required": false,
       "defaultValue": "",
       "helpMarkDown": "ms-resource:loc.input.help.arguments"
@@ -79,6 +80,15 @@
         "maxLength": "20000"
       },
       "helpMarkDown": ""
+    },
+    {
+      "name": "moduleName",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.moduleName",
+      "visibleRule": "targetType = module",
+      "required": true,
+      "defaultValue": "",
+      "helpMarkDown": "ms-resource:loc.input.help.moduleName"
     },
     {
       "name": "errorActionPreference",

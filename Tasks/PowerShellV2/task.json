@@ -71,15 +71,15 @@
       "name": "script",
       "type": "multiLine",
       "label": "Script",
-      "visibleRule": "targetType = inline",
-      "required": true,
-      "defaultValue": "# Write your PowerShell commands here.\n\nWrite-Host \"Hello World\"\n",
+      "visibleRule": "targetType = inline || targetType = module",
+      "required": false,
+      "defaultValue": "",
       "properties": {
         "resizable": "true",
         "rows": "10",
         "maxLength": "20000"
       },
-      "helpMarkDown": ""
+      "helpMarkDown": "PowerShell script. Required for inline type, optional for module type (runs after module import)."
     },
     {
       "name": "moduleName",
