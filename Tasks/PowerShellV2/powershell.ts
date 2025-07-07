@@ -52,7 +52,7 @@ async function run() {
             input_script = tl.getInput('script', /*required*/ true) || '';
         }
         else if (input_targetType.toUpperCase() == 'MODULE') {
-            input_moduleName = tl.getInput('moduleName', /*required*/ true) || '';
+            input_moduleName = tl.getInput('moduleName', /*required*/ false) || '';
             if (!input_moduleName.trim()) {
                 throw new Error(tl.loc('JS_InvalidModuleName', input_moduleName));
             }
