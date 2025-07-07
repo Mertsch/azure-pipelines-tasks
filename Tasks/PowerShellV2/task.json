@@ -17,7 +17,7 @@
   "author": "Microsoft Corporation",
   "version": {
     "Major": 2,
-    "Minor": 264,
+    "Minor": 265,
     "Patch": 0
   },
   "releaseNotes": "Script task consistency. Added support for macOS and Linux.",
@@ -263,6 +263,7 @@
     "JS_InvalidActionPreference": "Invalid action preference for %s: '%s'. The value must be one of: %s",
     "JS_InvalidFilePath": "Invalid file path '%s'. A path to a .ps1 file is required.",
     "JS_InvalidModuleName": "Invalid module name '%s'. Module name cannot be empty.",
+    "JS_ModuleNotFound": "Module '%s' not found. Please ensure the module is installed or available in the module path.",
     "JS_Stderr": "PowerShell wrote one or more lines to the standard error stream.",
     "JS_InvalidTargetType": "Invalid target type '%s'. The value must be one of: 'filepath', 'inline', or 'module'",
     "PS_ExitCode": "PowerShell exited with code '{0}'.",
