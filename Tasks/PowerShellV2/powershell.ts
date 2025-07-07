@@ -65,6 +65,7 @@ async function run() {
 
         // Generate the script contents.
         console.log(tl.loc('GeneratingScript'));
+        console.log("This log line is added to test the logging functionality.");
         let contents: string[] = [];
         if (input_errorActionPreference.toUpperCase() != 'DEFAULT') {
             contents.push(`$ErrorActionPreference = '${input_errorActionPreference}'`);
