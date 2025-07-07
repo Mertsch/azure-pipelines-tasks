@@ -17,7 +17,7 @@
   "author": "Microsoft Corporation",
   "version": {
     "Major": 2,
-    "Minor": 264,
+    "Minor": 265,
     "Patch": 0
   },
   "releaseNotes": "ms-resource:loc.releaseNotes",
@@ -263,6 +263,7 @@
     "JS_InvalidActionPreference": "ms-resource:loc.messages.JS_InvalidActionPreference",
     "JS_InvalidFilePath": "ms-resource:loc.messages.JS_InvalidFilePath",
     "JS_InvalidModuleName": "ms-resource:loc.messages.JS_InvalidModuleName",
+    "JS_ModuleNotFound": "ms-resource:loc.messages.JS_ModuleNotFound",
     "JS_Stderr": "ms-resource:loc.messages.JS_Stderr",
     "JS_InvalidTargetType": "ms-resource:loc.messages.JS_InvalidTargetType",
     "PS_ExitCode": "ms-resource:loc.messages.PS_ExitCode",
