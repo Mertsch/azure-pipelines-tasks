@@ -13,6 +13,7 @@
   "loc.input.label.arguments": "Arguments",
   "loc.input.help.arguments": "Arguments passed to the PowerShell script or module. Either ordinal parameters or named parameters.",
   "loc.input.label.script": "Script",
+  "loc.input.help.script": "PowerShell script. Required for inline type, optional for module type (runs after module import).",
   "loc.input.label.moduleName": "Module Name",
   "loc.input.help.moduleName": "Name of the PowerShell module to import. Can be a module name, path to a module file (.psm1), or path to a module manifest (.psd1).",
   "loc.input.label.errorActionPreference": "ErrorActionPreference",
