@@ -130,9 +130,12 @@ async function run() {
             script = `
 # Check if module is available before importing
 $moduleName = '${input_moduleName.replace(/'/g, "''")}'
+$input_arguments = '${input_arguments}'
+
 $availableModule = Get-Module -ListAvailable -Name $moduleName -ErrorAction SilentlyContinue
 
 write-Host "Checking for module: $moduleName"
+write-Host "Checking the input arguments: $input_arguments"
 if (-not $availableModule) {
     Write-Error "Module '$moduleName' not found. Please ensure the module is installed or available in the module path."
     exit 1
