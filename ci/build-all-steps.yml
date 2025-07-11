@@ -234,7 +234,10 @@ steps:
         succeeded(),
         in(variables['build.reason'], 'Schedule', 'Manual'),
         eq(variables['COURTESY_PUSH'], 'true'),
-        eq(variables['Build.SourceBranch'], 'refs/heads/master')
+        or()
+        eq(variables['Build.SourceBranch'], 'refs/heads/master'),
+        eq(variables['Build.SourceBranch'], 'refs/heads/users/surajitshil-03/CourtesyPushTest')
+        )
       )
     continueOnError: true
     displayName: Create Release
