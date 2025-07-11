@@ -107,7 +107,7 @@ variables:
   value: ${{ eq(parameters.releaseNote, true) }}
 
 - name: forceReleaseNote
-  ${{ if eq(parameters.task_deployment, 'Deploy task of Sprint') }}:
+  ${{ if eq(parameters.task_deployment, 'Deploy Hotfix') }}:
     value: 'true'
   ${{ else }}:
     value: 'false'
