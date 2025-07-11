@@ -215,6 +215,7 @@ steps:
       Write-Host "Build.SourceBranch: $(Build.SourceBranch)"
       Write-Host "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
       Write-Host "GitHubPAT is set: $([string]::IsNullOrEmpty('$(GitHubPAT)') -eq $false)"
+      Write-Host "forceReleaseNote: $(forceReleaseNote)"
       Write-Host "=== END DEBUG ==="
     displayName: Debug variables
     condition: always()
