@@ -32,7 +32,7 @@ parameters:
 - name: task_deployment
   displayName: Choose deployment options
   type: string
-  default: 'Deploy all Tasks'
+  default: 'Deploy all tasks'
   values:
   - 'Deploy all Tasks'
   - 'Deploy task of Sprint'
@@ -58,7 +58,10 @@ parameters:
   displayName: Publish to test feed (DistributedTasks-test), for infrastucture testing
   type: boolean
   default: false  
-
+- name: releaseNote
+  displayName: Generate Release note
+  type: boolean
+  default: false
 
 variables:
 - name: currentDate
@@ -100,7 +103,8 @@ variables:
   value: 'true'
 - name: COURTESY_PUSH
   value: 'true'
-
+- name: releaseNote
+  value: ${{ eq(parameters.releaseNote, true) }}
 
 extends:
   template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
@@ -175,6 +179,16 @@ extends:
         steps:
         - template: /ci/publish-steps.yml@self
         
+        # Generate Release Notes (conditional)
+        - ${{ if eq(parameters.releaseNote, true) }}:
+          - script: |
+              cd ci/ci-release-notes
+              npm install
+              node release-notes.js --token $(System.AccessToken) --version $(Build.BuildNumber)
+            displayName: Generate Release Notes
+            condition: and(succeeded(), eq(variables['releaseNote'], 'true'))
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
       # Courtesy Push
       - job: courtesy_push
