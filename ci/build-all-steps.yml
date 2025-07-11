@@ -222,7 +222,7 @@ steps:
   - powershell: |
       $releaseBranch = "$(branchName)"
 
-      if ($(currentSprintWeek) -eq 3) {
+      if ($(currentSprintWeek) -eq 3 -or '$(forceReleaseNote)' -eq 'true') {
         cd $(System.DefaultWorkingDirectory)/ci/ci-release-notes
         npm install
         node release-notes.js --token $(GitHubPAT) --version $(currentSprint) --releaseBranch $releaseBranch

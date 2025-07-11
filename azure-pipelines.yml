@@ -106,6 +106,12 @@ variables:
 - name: releaseNote
   value: ${{ eq(parameters.releaseNote, true) }}
 
+- name: forceReleaseNote
+  ${{ if eq(parameters.task_deployment, 'Deploy task of Sprint') }}:
+    value: 'true'
+  ${{ else }}:
+    value: 'false'
+
 extends:
   template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
