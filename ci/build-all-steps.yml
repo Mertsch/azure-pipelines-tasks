@@ -204,6 +204,21 @@ steps:
         ne(variables['numTasks'], 0)
       )
 
+
+  - powershell: |
+      Write-Host "=== DEBUG: Variable Values ==="
+      Write-Host "branchName: $(branchName)"
+      Write-Host "currentSprintWeek: $(currentSprintWeek)"
+      Write-Host "currentSprint: $(currentSprint)"
+      Write-Host "build.reason: $(Build.Reason)"
+      Write-Host "COURTESY_PUSH: $(COURTESY_PUSH)"
+      Write-Host "Build.SourceBranch: $(Build.SourceBranch)"
+      Write-Host "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
+      Write-Host "GitHubPAT is set: $([string]::IsNullOrEmpty('$(GitHubPAT)') -eq $false)"
+      Write-Host "=== END DEBUG ==="
+    displayName: Debug variables
+    condition: always()
+
   - powershell: |
       $releaseBranch = "$(branchName)"
 
