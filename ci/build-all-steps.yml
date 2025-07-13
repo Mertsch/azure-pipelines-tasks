@@ -221,11 +221,22 @@ steps:
     condition: always()
 
   - powershell: |
-      $releaseBranch = "$(branchName)"
+  
+      $releaseBranch = "$(Build.SourceBranch)" -replace "refs/heads/", ""
+      $tagName = "v$(currentSprint)"
 
       if ($(currentSprintWeek) -eq 3 -or '$(forceReleaseNote)' -eq 'true') {
         cd $(System.DefaultWorkingDirectory)/ci/ci-release-notes
         npm install
+      
+      $tagExists = git tag -l $tagName
+      if (-not $tagExists) {
+        Write-Host "Creating tag $tagName"
+        git tag $tagName
+        git push origin $tagName
+        Start-Sleep -Seconds 3
+      }
+      
         node release-notes.js --token $(GitHubPAT) --version $(currentSprint) --releaseBranch $releaseBranch
       } else {
         echo "Skipping since release notes generating on week 3"
