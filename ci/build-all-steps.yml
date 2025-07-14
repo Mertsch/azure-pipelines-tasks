@@ -248,7 +248,7 @@ steps:
         eq(variables['COURTESY_PUSH'], 'true'),
         or(
         eq(variables['Build.SourceBranch'], 'refs/heads/master'),
-        eq(variables['Build.SourceBranch'], 'refs/heads/users/surajitshil-03/CourtesyPushTest')
+        eq(variables['Build.SourceBranch'], 'refs/heads/users/surajitshil-03/LatestTest')
         )
       )
     continueOnError: true
