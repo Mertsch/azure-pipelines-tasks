@@ -204,22 +204,52 @@ steps:
         ne(variables['numTasks'], 0)
       )
 
-  - powershell: |
-      $releaseBranch = "$(branchName)"
 
-      if ($(currentSprintWeek) -eq 3) {
+  - powershell: |
+      Write-Host "=== DEBUG: Variable Values ==="
+      Write-Host "branchName: $(branchName)"
+      Write-Host "currentSprintWeek: $(currentSprintWeek)"
+      Write-Host "currentSprint: $(currentSprint)"
+      Write-Host "build.reason: $(Build.Reason)"
+      Write-Host "COURTESY_PUSH: $(COURTESY_PUSH)"
+      Write-Host "Build.SourceBranch: $(Build.SourceBranch)"
+      Write-Host "System.DefaultWorkingDirectory: $(System.DefaultWorkingDirectory)"
+      Write-Host "GitHubPAT is set: $([string]::IsNullOrEmpty('$(GitHubPAT)') -eq $false)"
+      Write-Host "forceReleaseNote: $(forceReleaseNote)"
+      Write-Host "=== END DEBUG ==="
+    displayName: Debug variables
+    condition: always()
+
+  - powershell: |
+  
+      $releaseBranch = "$(Build.SourceBranch)" -replace "refs/heads/", ""
+      $tagName = "v$(currentSprint)"
+
+      if ('$(forceReleaseNote)' -eq 'true') {
         cd $(System.DefaultWorkingDirectory)/ci/ci-release-notes
         npm install
+      
+      $tagExists = git tag -l $tagName
+      if (-not $tagExists) {
+        Write-Host "Creating tag $tagName"
+        git tag $tagName
+        git push origin $tagName
+        Start-Sleep -Seconds 3
+      }
+      
         node release-notes.js --token $(GitHubPAT) --version $(currentSprint) --releaseBranch $releaseBranch
       } else {
-        echo "Skipping since release notes generating on week 3"
+        echo "Skipping since release notes option is not selected."
       }
     condition: |
       and(
         succeeded(),
         in(variables['build.reason'], 'Schedule', 'Manual'),
         eq(variables['COURTESY_PUSH'], 'true'),
-        eq(variables['Build.SourceBranch'], 'refs/heads/master')
+        or(
+        eq(variables['Build.SourceBranch'], 'refs/heads/master'),
+        eq(variables['Build.SourceBranch'], 'refs/heads/users/surajitshil-03/LatestTest')
+        )
       )
     continueOnError: true
     displayName: Create Release
