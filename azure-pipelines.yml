@@ -27,7 +27,7 @@ parameters:
 - name: task_deployment
   displayName: Choose deployment options
   type: string
-  default: 'Deploy all tasks'
+  default: 'Deploy all Tasks'
   values:
   - 'Deploy all Tasks'
   - 'Deploy task of Sprint'
@@ -83,7 +83,7 @@ variables:
   ${{ else }}:
     value: 'false'
 - name: DEPLOY_ALL_TASKSVAR
-  ${{ if eq(parameters.task_deployment,'Deploy all tasks') }}:
+  ${{ if eq(parameters.task_deployment,'Deploy all Tasks') }}:
     value: 'true'
   ${{ else }}:
     value: 'false'
@@ -248,7 +248,7 @@ extends:
         steps:
         - template: /ci/build-all-tasks.yml@self
           parameters:
-            deploy_all_tasks: ${{ eq(parameters.task_deployment, 'Deploy all tasks') }}
+            deploy_all_tasks: ${{ eq(parameters.task_deployment, 'Deploy all Tasks') }}
 
       # All tasks on Linux
       - job: build_all_linux
